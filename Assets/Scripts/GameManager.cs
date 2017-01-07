@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
 	private bool hasCreated = false;
 	private bool isWaiting = false;
+	private bool isPlaying = false;
 
     // Use this for initialization
     void Start() {
@@ -31,13 +32,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update() {
 		// created match, now waiting for second player
-		if (isWaiting && hasCreated) {
+		if (isWaiting && hasCreated && !isPlaying) {
 			Debug.Log ("waiting...");
 		}
 
 		// player joined, we can load the next thing
-		if (!isWaiting && hasCreated) {
+		if (!isWaiting && hasCreated && !isPlaying) {
 			Debug.Log ("done waiting!");
+			isPlaying = true;
 			// Level 0 is menu
 			LoadNextLevel();
 		}
