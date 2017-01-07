@@ -58,7 +58,18 @@ public class GameManager : NetworkBehaviour
 		CurrentLevel = 0;
 		CreateGameAndWait ();
     }
+    
+    public void ReturnToMenu()
+    {
+        CurrentLevel = 0;
+        SceneManager.LoadScene(Levels[CurrentLevel]);
+    }
 
+    public void ShowGameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+    
 	//[Command]
     public void LoadNextLevel()
     {
@@ -78,6 +89,11 @@ public class GameManager : NetworkBehaviour
     public void ShowTarget()
     {
         target.enabled = true;
+    }
+
+    public void RedoLevel()
+    {
+        SceneManager.LoadScene(Levels[CurrentLevel]);
     }
 
 	private void CreateGameAndWait (){
