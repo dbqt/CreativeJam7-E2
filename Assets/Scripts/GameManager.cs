@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
 	public NetworkCalls networkCalls;
 	public Canvas menuCanvas;
+    public Text target;
 
 	private bool hasCreated = false;
 	private bool isWaiting = false;
@@ -68,10 +69,16 @@ public class GameManager : MonoBehaviour
 		menuCanvas.enabled = false;
 	}
 
+    public void ShowTarget()
+    {
+        target.enabled = true;
+    }
+
 	private void CreateGameAndWait (){
 		networkCalls.StartMatch ();
 		HideCanvas ();
-		hasCreated = true;
+        ShowTarget();
+        hasCreated = true;
 		isWaiting = true;
 	}
 		

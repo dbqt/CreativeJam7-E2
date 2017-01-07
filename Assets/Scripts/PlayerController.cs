@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject Head;
 
+	public ParticleSystem Fire;
+
 	public float moveSpeed = 1f;
 
 	// Use this for initialization
@@ -25,8 +27,11 @@ public class PlayerController : MonoBehaviour {
 		var rotationHead = new Vector3 (Input.GetAxis ("VerticalRight"), 0f, 0f);
 
 		if (Input.GetButtonDown ("Fire1")) {
-			Debug.Log ("Fire1 activated");
-			ActivateEffect ();
+			Fire.Play ();                                        
+		} 
+
+		if (Input.GetButtonUp("Fire1")) {
+			Fire.Stop ();
 		}
 
 		ApplyTransformations (move, rotationBody, rotationHead);
@@ -61,12 +66,5 @@ public class PlayerController : MonoBehaviour {
 		q.x = Mathf.Tan (0.5f * Mathf.Deg2Rad * angleX);
 
 		return q;
-	}
-
-	/// <summary>
-	/// Activates the effect.
-	/// </summary>
-	private void ActivateEffect (){
-		Debug.Log ("effect~"+ this.gameObject.GetComponent<NetworkIdentity>().isServer);
 	}
 }
