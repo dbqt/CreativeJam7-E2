@@ -955,7 +955,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1861241964}
   - 114: {fileID: 1861241963}
-  - 114: {fileID: 1861241962}
   - 114: {fileID: 1861241961}
   m_Layer: 0
   m_Name: NetworkManager
@@ -976,22 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d69aebf7ac3cbb42b49779ffd9411dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1861241962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012616066536, guid: 7dc9b719a92ff6e4897b5692cd8b8531,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1861241960}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 227461547, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
 --- !u!114 &1861241963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +984,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861241960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 97c8483ff3b28e142bf8011e8c8da4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
