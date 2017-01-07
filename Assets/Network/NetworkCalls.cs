@@ -2,7 +2,6 @@
 using UnityEngine.Networking.Match;
 
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +11,6 @@ public class NetworkCalls : NetworkBehaviour {
 
 	NetworkMatch matchMaker;
 
-	public Canvas canvas;
-
 	private MatchInfoSnapshot currentMatch;
 
 	// Use this for initialization
@@ -21,28 +18,36 @@ public class NetworkCalls : NetworkBehaviour {
 		NetworkManager.singleton.StartMatchMaker ();
 		matchMaker = NetworkManager.singleton.matchMaker;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+	/// <summary>
+	/// Starts the match.
+	/// </summary>
 	public void StartMatch(){
 		matchMaker.CreateMatch ("room", 2, true, "", "", "", 0, 1, NetworkManager.singleton.OnMatchCreate);
-		canvas.enabled = false;
 	}
 
+	/// <summary>
+	/// Joins the match.
+	/// </summary>
 	public void JoinMatch(){
 		matchMaker.ListMatches (0, 2, "", false, 0, 1, JoinActualMatch);
-		canvas.enabled = false;
 	}
 
+	/// <summary>
+	/// Joins the actual match.
+	/// </summary>
+	/// <param name="success">If set to <c>true</c> success.</param>
+	/// <param name="info">Info.</param>
+	/// <param name="matches">Matches.</param>
 	void JoinActualMatch(bool success, string info, List<MatchInfoSnapshot> matches) {
 		Debug.Log (matches);
 		currentMatch = matches.FirstOrDefault ();
 		matchMaker.JoinMatch (currentMatch.networkId, "", "", "", 0, 1, NetworkManager.singleton.OnMatchJoined);
 	}
 
+	/// <summary>
+	/// Destroies the match.
+	/// </summary>
 	public void DestroyMatch(){
 		matchMaker.DestroyMatch (currentMatch.networkId, 1, NetworkManager.singleton.OnDestroyMatch);
 	}

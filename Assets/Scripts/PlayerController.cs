@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!this.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
+
 		var move = new Vector3 (Input.GetAxis ("Horizontal"), 0f, Input.GetAxis ("Vertical"));
 		move *= moveSpeed;
 
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButtonDown ("Fire1")) {
 			Debug.Log ("Fire1 activated");
+			ActivateEffect ();
 		}
 
 		ApplyTransformations (move, rotationBody, rotationHead);
@@ -57,5 +61,12 @@ public class PlayerController : MonoBehaviour {
 		q.x = Mathf.Tan (0.5f * Mathf.Deg2Rad * angleX);
 
 		return q;
+	}
+
+	/// <summary>
+	/// Activates the effect.
+	/// </summary>
+	private void ActivateEffect (){
+		Debug.Log ("effect~"+ this.gameObject.GetComponent<NetworkIdentity>().isServer);
 	}
 }
