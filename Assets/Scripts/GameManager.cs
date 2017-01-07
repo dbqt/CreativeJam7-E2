@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int CurrentLevel;
 
 	public NetworkCalls networkCalls;
+	public Canvas menuCanvas;
 
 	private bool hasCreated = false;
 	private bool isWaiting = false;
@@ -62,9 +64,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(Levels[CurrentLevel]);
     }
 
+	public void HideCanvas() {
+		menuCanvas.enabled = false;
+	}
+
 	private void CreateGameAndWait (){
 		networkCalls.StartMatch ();
+		HideCanvas ();
 		hasCreated = true;
 		isWaiting = true;
 	}
+		
 }

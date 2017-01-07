@@ -550,6 +550,7 @@ MonoBehaviour:
   - Level1
   CurrentLevel: 0
   networkCalls: {fileID: 1861241961}
+  menuCanvas: {fileID: 1412704369}
 --- !u!4 &1170475402
 Transform:
   m_ObjectHideFlags: 0
@@ -822,6 +823,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1170475401}
+        m_MethodName: HideCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1587922738
@@ -998,7 +1010,7 @@ MonoBehaviour:
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
-  m_LogLevel: 0
+  m_LogLevel: 2
   m_PlayerPrefab: {fileID: 1000010432852530, guid: 86eee2f6939a2fb4e8c7f98530e17027,
     type: 2}
   m_AutoCreatePlayer: 1
