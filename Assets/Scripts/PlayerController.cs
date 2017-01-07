@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!this.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
+		//if (!this.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
 
 		var move = new Vector3 (Input.GetAxis ("Horizontal"), 0f, Input.GetAxis ("Vertical"));
 		move *= moveSpeed;
@@ -71,4 +71,19 @@ public class PlayerController : MonoBehaviour {
 
 		return q;
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Trigger enter with "+other.gameObject.name);
+        if (other.gameObject.tag == "Exit")
+        {
+            GameManager.instance.LoadNextLevel();
+        }
+        if (other.gameObject.tag == "Death")
+        {
+            //this.gameObject.GetComponents<AudioSource>()[1].Play();
+            //DEATH SCREAM
+            GameManager.instance.ShowGameOver();
+        }
+    }
 }
