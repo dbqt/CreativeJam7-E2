@@ -43,8 +43,9 @@ public class GameManager : MonoBehaviour
 		}
     }
 
-	void OnPlayerConnected(NetworkPlayer player){
+	public void OnPlayerConnected(){
 		Debug.Log("Player connected!");
+		isWaiting = false;
 	}
 
     public void StartNewGame()
