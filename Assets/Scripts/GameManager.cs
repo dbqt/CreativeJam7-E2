@@ -3,7 +3,8 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
+
 {
     static public GameManager instance = null;
     public string[] Levels;
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
 		CreateGameAndWait ();
     }
 
-	[Command]
+	//[Command]
     public void LoadNextLevel()
     {
         if (Levels.Length < 0) return;
