@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
 		CreateGameAndWait ();
     }
 
+	[Command]
     public void LoadNextLevel()
     {
         if (Levels.Length < 0) return;
