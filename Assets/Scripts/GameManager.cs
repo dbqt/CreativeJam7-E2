@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Text target;
 	public GameObject player1Prefab, playerVRPrefab;
 
+	private GameObject playerInstance;
+
 
     // Use this for initialization
     void Start() {
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
         CurrentLevel = CurrentLevel%Levels.Length;
         SceneManager.LoadScene(Levels[CurrentLevel]);
+		ResetPlayers ();
     }
 
 	public void HideCanvas() {
@@ -76,6 +79,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(Levels[CurrentLevel]);
     }
+
+	public void ResetPlayers (){
+		playerInstance = Instantiate (player1Prefab) as GameObject;
+	}
 
 	public void LoadVRMode(){
 	
