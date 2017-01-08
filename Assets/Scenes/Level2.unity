@@ -1488,7 +1488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1852c466acb4ff341bf78f66cb491e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behavior: {fileID: 0}
+  roof: {fileID: 345975672}
+  ice: {fileID: 1104748752}
 --- !u!23 &514447955
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2405,6 +2406,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012920459044, guid: ecd023356cebda14183bf2549763cc31,
+        type: 2}
+      propertyPath: mur
+      value: 
+      objectReference: {fileID: 1564127788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecd023356cebda14183bf2549763cc31, type: 2}
   m_IsPrefabParent: 0
@@ -3420,7 +3426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15f03ca3b15ef945865138205e485ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behavior: {fileID: 0}
+  roof: {fileID: 345975672}
+  water: {fileID: 514447953}
 --- !u!23 &1104748754
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3814,6 +3821,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012920459044, guid: ecd023356cebda14183bf2549763cc31,
+        type: 2}
+      propertyPath: mur
+      value: 
+      objectReference: {fileID: 1564127788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecd023356cebda14183bf2549763cc31, type: 2}
   m_IsPrefabParent: 0
@@ -4194,6 +4206,8 @@ MonoBehaviour:
   - {fileID: 1753722176}
   - {fileID: 1810407177}
   - {fileID: 1227990240}
+  balance: {fileID: 9322552}
+  roof: {fileID: 345975672}
 --- !u!23 &1564127790
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4716,6 +4730,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012920459044, guid: ecd023356cebda14183bf2549763cc31,
+        type: 2}
+      propertyPath: mur
+      value: 
+      objectReference: {fileID: 1564127788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecd023356cebda14183bf2549763cc31, type: 2}
   m_IsPrefabParent: 0
@@ -4928,6 +4947,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012920459044, guid: ecd023356cebda14183bf2549763cc31,
+        type: 2}
+      propertyPath: mur
+      value: 
+      objectReference: {fileID: 1564127788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecd023356cebda14183bf2549763cc31, type: 2}
   m_IsPrefabParent: 0
@@ -5186,7 +5210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15f03ca3b15ef945865138205e485ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behavior: {fileID: 0}
+  roof: {fileID: 345975672}
+  water: {fileID: 1937827351}
 --- !u!23 &1839112975
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5440,7 +5465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1852c466acb4ff341bf78f66cb491e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behavior: {fileID: 0}
+  roof: {fileID: 345975672}
+  ice: {fileID: 1839112973}
 --- !u!23 &1937827353
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5608,6 +5634,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012920459044, guid: ecd023356cebda14183bf2549763cc31,
+        type: 2}
+      propertyPath: mur
+      value: 
+      objectReference: {fileID: 1564127788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecd023356cebda14183bf2549763cc31, type: 2}
   m_IsPrefabParent: 0
