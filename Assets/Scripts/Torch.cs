@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
+
 using System.Collections;
 
 public class Torch : Actionnable {
@@ -13,7 +15,10 @@ public class Torch : Actionnable {
 
         Fire.Play();
 
-        behavior.toggleTorch(this.gameObject);
+		if (isServer) {
+			Debug.Log ("im server");
+			behavior.toggleTorch (this.gameObject);
+		}
     }
 
     public override void IceAction()
@@ -22,6 +27,17 @@ public class Torch : Actionnable {
 
         Fire.Stop();
 
-        behavior.toggleTorch(this.gameObject);
+		if (isServer) {
+			Debug.Log ("im server");
+			behavior.toggleTorch (this.gameObject);
+		} else {
+			CmdIceAction ();
+		}
+	
     }
+
+	[Command]
+	public void CmdIceAction(){
+		IceAction ();
+	}
 }

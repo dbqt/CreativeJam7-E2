@@ -19,9 +19,6 @@ public class GameManager : MonoBehaviour
 	private bool isWaiting = false;
 	private bool isPlaying = false;
 
-	private bool player1 = false, player2 = false;
-	private bool amServer = false;
-
     // Use this for initialization
     void Start() {
         // singleton logic
@@ -55,7 +52,6 @@ public class GameManager : MonoBehaviour
 	public void OnPlayerConnectedToServer(bool isServer){
 		Debug.Log("Player connected!");
 		isWaiting = false;
-		amServer = isServer;
 	}
 
     public void StartNewGame()
@@ -86,11 +82,11 @@ public class GameManager : MonoBehaviour
         CurrentLevel = CurrentLevel%Levels.Length;
         SceneManager.LoadScene(Levels[CurrentLevel]);
 
-		if (amServer) {
+		/*if (amServer) {
 			Instantiate (player1Prefab, Vector3.zero, Quaternion.identity);
 		} else {
 			Instantiate (playerVRPrefab, Vector3.zero, Quaternion.identity);
-		}
+		}*/
     }
 
 	public void HideCanvas() {
@@ -106,6 +102,22 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(Levels[CurrentLevel]);
     }
+
+	/*void OnServerInitialized(){
+		InstantiatePlayer1 ();
+	}
+
+	void OnConnectedToServer() {
+		InstantiatePlayer2 ();
+	}*/
+
+	public GameObject InstantiatePlayer1(){
+		return Instantiate (player1Prefab, Vector3.zero, Quaternion.identity) as GameObject;
+	}
+
+	public GameObject InstantiatePlayer2(){
+		return Instantiate (playerVRPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+	}
 
 	private void CreateGameAndWait (){
 		networkCalls.StartMatch ();
