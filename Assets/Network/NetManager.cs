@@ -7,7 +7,13 @@ public class NetManager : NetworkManager {
 		base.OnServerAddPlayer (connection, id);
 		Debug.Log ("nb : " + this.numPlayers);
 		if(this.numPlayers == 2)
-			GameManager.instance.OnPlayerConnected ();
+			GameManager.instance.OnPlayerConnectedToServer (Network.isServer);
+		
 	}
+
+	/*public override void OnClientConnect(NetworkConnection connection) {
+		GameManager.instance.OnPlayerConnectedToServer (Network.isServer);
+	}*/
+
 	
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class Actionnable : MonoBehaviour {
+public class Actionnable : NetworkBehaviour {
 	public virtual void FireAction() {
 		Debug.Log ("fire action trigger!");
 	}

@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour
 
 {
     static public GameManager instance = null;
@@ -13,10 +13,14 @@ public class GameManager : NetworkBehaviour
 	public NetworkCalls networkCalls;
 	public Canvas menuCanvas;
     public Text target;
+	public GameObject player1Prefab, playerVRPrefab;
 
 	private bool hasCreated = false;
 	private bool isWaiting = false;
 	private bool isPlaying = false;
+
+	private bool player1 = false, player2 = false;
+	private bool amServer = false;
 
     // Use this for initialization
     void Start() {
@@ -44,13 +48,14 @@ public class GameManager : NetworkBehaviour
 			Debug.Log ("done waiting!");
 			isPlaying = true;
 			// Level 0 is menu
-			LoadNextLevel();
+			//LoadNextLevel();
 		}
     }
 
-	public void OnPlayerConnected(){
+	public void OnPlayerConnectedToServer(bool isServer){
 		Debug.Log("Player connected!");
 		isWaiting = false;
+		amServer = isServer;
 	}
 
     public void StartNewGame()
@@ -80,6 +85,12 @@ public class GameManager : NetworkBehaviour
         Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
         CurrentLevel = CurrentLevel%Levels.Length;
         SceneManager.LoadScene(Levels[CurrentLevel]);
+
+		if (amServer) {
+			Instantiate (player1Prefab, Vector3.zero, Quaternion.identity);
+		} else {
+			Instantiate (playerVRPrefab, Vector3.zero, Quaternion.identity);
+		}
     }
 
 	public void HideCanvas() {
