@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
 
 	public Canvas menuCanvas;
     public Text target;
-	public GameObject player1Prefab, playerVRPrefab;
 
-	private GameObject playerInstance;
+	public GameObject playerInstance, vrPlayer;
 
 	public bool isVRMode = false;
+
+	private AsyncOperation currentOperation;
+	private bool newOperation = false;
 
 
     // Use this for initialization
@@ -31,10 +33,21 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(this.gameObject);
+		if (isVRMode) {
+			playerInstance.SetActive (false);
+			vrPlayer.SetActive (true);
+		} else {
+			playerInstance.SetActive (true);
+			vrPlayer.SetActive (false);
+		}
     }
 
 	void Update(){
-	
+		if (newOperation && currentOperation.isDone) {
+			ResetPlayers ();
+			newOperation = false;
+		}
+
 	}
 
     public void StartNewGame()
@@ -55,15 +68,23 @@ public class GameManager : MonoBehaviour
     
     public void LoadNextLevel()
     {
-		isVRMode = false;
         if (Levels.Length < 0) return;
+
+		if (isVRMode) {
+			playerInstance.SetActive (false);
+			vrPlayer.SetActive (true);
+		} else {
+			playerInstance.SetActive (true);
+			vrPlayer.SetActive (false);
+		}
 
         // Level 0 is menu
         CurrentLevel++;
         Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
         CurrentLevel = CurrentLevel%Levels.Length;
-        SceneManager.LoadScene(Levels[CurrentLevel]);
-		ResetPlayers ();
+		currentOperation = SceneManager.LoadSceneAsync(Levels[CurrentLevel]);
+		newOperation = true;
+
     }
 
 	public void HideCanvas() {
@@ -81,19 +102,14 @@ public class GameManager : MonoBehaviour
     }
 
 	public void ResetPlayers (){
-		playerInstance = Instantiate (isVRMode ? playerVRPrefab : player1Prefab, Vector3.zero, Quaternion.identity) as GameObject;
-	}
-
-	public void LoadNextVRLevel(){
-		isVRMode = true;
-		if (Levels.Length < 0) return;
-
-		// Level 0 is menu
-		CurrentLevel++;
-		Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
-		CurrentLevel = CurrentLevel%Levels.Length;
-		SceneManager.LoadScene(Levels[CurrentLevel]);
-		ResetPlayers ();
+		if (isVRMode) {
+			var o = GameObject.Find ("VRSPOT");
+			vrPlayer.transform.position = o.transform.position;
+			vrPlayer.transform.rotation = o.transform.rotation;
+		} else {
+			playerInstance.transform.position = Vector3.zero;
+			playerInstance.transform.rotation = Quaternion.identity;
+		}
 	}
 
 	public void SyncLevel(){

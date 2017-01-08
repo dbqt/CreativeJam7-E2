@@ -5,7 +5,7 @@ public class Torch : Actionnable {
 
     public ParticleSystem Fire;
 
-    public Torch_behavior behavior ;
+    public GameObject mur;
 
     public override void FireAction()
     {
@@ -13,7 +13,7 @@ public class Torch : Actionnable {
 
         Fire.Play();
 
-        behavior.toggleTorch(this.gameObject);
+        mur.GetComponent<Torch_behavior>().toggleTorch(this.gameObject, true);
     }
 
     public override void IceAction()
@@ -22,6 +22,6 @@ public class Torch : Actionnable {
 
         Fire.Stop();
 
-        behavior.toggleTorch(this.gameObject);
+        mur.GetComponent<Torch_behavior>().toggleTorch(this.gameObject, false);
     }
 }

@@ -9,9 +9,13 @@ public class PlayerController : MonoBehaviour {
 
 	public ParticleSystem Fire;
 
+    public ParticleSystem Ice;
+
     public GameObject FireStaff;
 
-	public float moveSpeed = 1f;
+    public GameObject IceStaff;
+
+    public float moveSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +42,19 @@ public class PlayerController : MonoBehaviour {
             FireStaff.GetComponent<CapsuleCollider>().enabled = false;
         }
 
-		ApplyTransformations (move, rotationBody, rotationHead);
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Ice.Play();
+            IceStaff.GetComponent<CapsuleCollider>().enabled = true;
+        }
+
+        if (Input.GetButtonUp("Fire2"))
+        {
+            Ice.Stop();
+            IceStaff.GetComponent<CapsuleCollider>().enabled = false;
+        }
+
+        ApplyTransformations (move, rotationBody, rotationHead);
 	}
 
 	private void ApplyTransformations(Vector3 movement, Vector3 rotationBody, Vector3 rotationHead) {
