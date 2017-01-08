@@ -16,5 +16,12 @@ public class Torch : Actionnable {
         behavior.toggleTorch(this.gameObject);
     }
 
-    // do nothing with ice action
+    public override void IceAction()
+    {
+        base.IceAction();
+
+        Fire.Stop();
+
+        behavior.toggleTorch(this.gameObject);
+    }
 }
