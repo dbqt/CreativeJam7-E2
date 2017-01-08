@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 	public Canvas menuCanvas;
     public Text target;
 
-	public GameObject playerInstance;
+	public GameObject playerInstance, vrPlayer;
 
 	public bool isVRMode = false;
 
@@ -33,6 +33,13 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(this.gameObject);
+		if (isVRMode) {
+			playerInstance.SetActive (false);
+			vrPlayer.SetActive (true);
+		} else {
+			playerInstance.SetActive (true);
+			vrPlayer.SetActive (false);
+		}
     }
 
 	void Update(){
@@ -63,6 +70,14 @@ public class GameManager : MonoBehaviour
     {
         if (Levels.Length < 0) return;
 
+		if (isVRMode) {
+			playerInstance.SetActive (false);
+			vrPlayer.SetActive (true);
+		} else {
+			playerInstance.SetActive (true);
+			vrPlayer.SetActive (false);
+		}
+
         // Level 0 is menu
         CurrentLevel++;
         Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
@@ -89,8 +104,8 @@ public class GameManager : MonoBehaviour
 	public void ResetPlayers (){
 		if (isVRMode) {
 			var o = GameObject.Find ("VRSPOT");
-			playerInstance.transform.position = o.transform.position;
-			playerInstance.transform.rotation = o.transform.rotation;
+			vrPlayer.transform.position = o.transform.position;
+			vrPlayer.transform.rotation = o.transform.rotation;
 		} else {
 			playerInstance.transform.position = Vector3.zero;
 			playerInstance.transform.rotation = Quaternion.identity;

@@ -279,6 +279,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1170475402}
   m_RootOrder: 2
+--- !u!1 &560046971 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013421673898, guid: 423d8254163747848a186ac2c4bc3468,
+    type: 2}
+  m_PrefabInternal: {fileID: 820780701}
 --- !u!1001 &820780701
 Prefab:
   m_ObjectHideFlags: 0
@@ -340,7 +345,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013421673898, guid: 423d8254163747848a186ac2c4bc3468, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 423d8254163747848a186ac2c4bc3468, type: 2}
@@ -434,6 +439,7 @@ MonoBehaviour:
   menuCanvas: {fileID: 1412704369}
   target: {fileID: 1903011066}
   playerInstance: {fileID: 2061926624}
+  vrPlayer: {fileID: 560046971}
   isVRMode: 0
 --- !u!4 &1170475402
 Transform:
