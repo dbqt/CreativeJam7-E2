@@ -10,6 +10,7 @@ public class Torch_behavior : MonoBehaviour
 
     public GameObject balance;
     public GameObject roof;
+	public GameObject water1, water2;
 
     // Use this for initialization
     void Start()
@@ -48,8 +49,8 @@ public class Torch_behavior : MonoBehaviour
         {
             Debug.Log("Bonne combinaison. Actionner balance");
 
-            balance.GetComponent<Rigidbody>().isKinematic = false;
-            balance.GetComponent<Rigidbody>().useGravity = true;
+           // balance.GetComponent<Rigidbody>().isKinematic = false;
+            //balance.GetComponent<Rigidbody>().useGravity = true;
 
             /*roof.GetComponent<Water_behavior>().waters[0].GetComponent<MeshRenderer>().enabled = true;
             roof.GetComponent<Water_behavior>().waters[1].GetComponent<MeshRenderer>().enabled = true;
@@ -57,7 +58,11 @@ public class Torch_behavior : MonoBehaviour
             roof.GetComponent<Water_behavior>().waters[1].GetComponent<CapsuleCollider>().enabled = true;*/
 
             roof.SetActive(true);
-            balance.GetComponent<BalanceBoard_behavior>().StartCycle();
+			water1.SetActive (true);
+			water2.SetActive (true);
+
+			balance.GetComponent<Animator> ().SetTrigger ("initBalance");
+            //balance.GetComponent<BalanceBoard_behavior>().StartCycle();
         }
     }
 

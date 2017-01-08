@@ -12,6 +12,8 @@ public class Water_behavior : MonoBehaviour
 
     public GameObject balance;
 
+	public Animator doorOpening;
+
     // Use this for initialization
     void Start()
     {
@@ -70,9 +72,8 @@ public class Water_behavior : MonoBehaviour
     {
         waterStates[water] = state;
 
-        if (!waterStates[waters[1]] && waterStates[waters[0]])
-        {
-            // appel de fonction pour animation
-        }
+		balance.GetComponent<Animator> ().SetBool ("isBalanced", waterStates [waters [1]] && !waterStates [waters [0]]);
+		if(waterStates [waters [1]] && !waterStates [waters [0]])
+			{doorOpening.SetTrigger ("openDoorLevel2");}
     }
 }
