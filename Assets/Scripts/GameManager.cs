@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int CurrentLevel;
 
 	public NetworkCalls networkCalls;
+	public NetManager networkManager;
 	public Canvas menuCanvas;
     public Text target;
 	public GameObject player1Prefab, playerVRPrefab;
@@ -57,8 +58,15 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
 		CurrentLevel = 0;
+		//InstantiatePlayer1 ();
+		networkManager.playerNumber = 1;
 		CreateGameAndWait ();
     }
+
+	public void JoinGame() {
+		networkManager.playerNumber = 2;
+		networkCalls.JoinMatch ();
+	}
     
     public void ReturnToMenu()
     {
