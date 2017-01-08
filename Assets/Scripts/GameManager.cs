@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager instance = null;
     public string[] Levels;
-	public string[] LevelsVR;
 
     public int CurrentLevel;
 
@@ -16,6 +15,8 @@ public class GameManager : MonoBehaviour
 	public GameObject player1Prefab, playerVRPrefab;
 
 	private GameObject playerInstance;
+
+	public bool isVRMode = false;
 
 
     // Use this for initialization
@@ -32,11 +33,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-		
+	void Update(){
+	
+	}
 
     public void StartNewGame()
     {
@@ -56,6 +55,7 @@ public class GameManager : MonoBehaviour
     
     public void LoadNextLevel()
     {
+		isVRMode = false;
         if (Levels.Length < 0) return;
 
         // Level 0 is menu
@@ -81,21 +81,23 @@ public class GameManager : MonoBehaviour
     }
 
 	public void ResetPlayers (){
-		playerInstance = Instantiate (player1Prefab) as GameObject;
-	}
-
-	public void LoadVRMode(){
-	
+		playerInstance = Instantiate (isVRMode ? playerVRPrefab : player1Prefab, Vector3.zero, Quaternion.identity) as GameObject;
 	}
 
 	public void LoadNextVRLevel(){
-	
+		isVRMode = true;
 		if (Levels.Length < 0) return;
 
 		// Level 0 is menu
+		CurrentLevel++;
 		Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
 		CurrentLevel = CurrentLevel%Levels.Length;
 		SceneManager.LoadScene(Levels[CurrentLevel]);
+		ResetPlayers ();
+	}
+
+	public void SyncLevel(){
+	
 	}
 		
 }
