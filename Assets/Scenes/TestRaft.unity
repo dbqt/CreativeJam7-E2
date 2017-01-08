@@ -468,7 +468,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1434362157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26f8e955ce1e354fa8b9fde4406dd36, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c9a6c2079ff744098f6827c949408d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   raft: {fileID: 1434362157}
@@ -477,7 +477,7 @@ MonoBehaviour:
   Corner2: {fileID: 758357755}
   Corner3: {fileID: 1201620164}
   Corner4: {fileID: 1019695462}
-  limitY: -5
+  limitY: -1
   spawnDelay: 1
 --- !u!1 &1764882224
 GameObject:
