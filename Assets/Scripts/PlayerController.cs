@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 
 		Head.transform.Rotate (rotationHead);
 
-		Head.transform.rotation = ClampRotationAroundXAxis (Head.transform.rotation, -15f, 15f);
+		Head.transform.rotation = ClampRotationAroundXAxis (Head.transform.rotation, -45f, 15f);
 		var rot = Head.transform.localEulerAngles;
 		rot.y = 0f;
 		rot.z = 0f;
