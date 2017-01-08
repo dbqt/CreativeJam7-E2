@@ -7,9 +7,8 @@ public class BalanceBoard_behavior : MonoBehaviour
     public int forceStrengthLeft;
     public int forceStrengthRight; //Strength in Newton of the water going into the buckets.
     float balanceCheckDelay = 2; //Delay in checking balance; prevents solving the puzzle by having the angle briefly skirt around the expected values.
-
-    // Use this for initialization
-    void Start()
+    
+    public void StartCycle()
     {
         Invoke("balanceCheck", balanceCheckDelay);
     }
@@ -32,7 +31,6 @@ public class BalanceBoard_behavior : MonoBehaviour
             Vector3 downwardsForceR = new Vector3(0, forceStrengthRight, 0);
             gameObject.GetComponent<Rigidbody>().AddForceAtPosition(downwardsForceR, forceTarget.transform.position);
         }
-        
     }
 
     void balanceCheck()

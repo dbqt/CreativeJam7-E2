@@ -8,6 +8,9 @@ public class Torch_behavior : MonoBehaviour
     //bool[] torchLightUp = new bool[5];
     Dictionary<GameObject, bool> torchStates;
 
+    public GameObject balance;
+    public GameObject roof;
+
     // Use this for initialization
     void Start()
     {
@@ -21,6 +24,8 @@ public class Torch_behavior : MonoBehaviour
         {
             torchStates.Add(torch, false);
         }
+
+        roof.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,26 +36,35 @@ public class Torch_behavior : MonoBehaviour
             if (torch.Value)
             {
                 Debug.Log("Torch" + torch.Key + "is lit");
-                //couleur vert pour cube
             }
-            //couleur rouge pour cube
         }
+    }
+
+    public void toggleTorch(GameObject torch, bool state)
+    {
+        torchStates[torch] = state;
 
         if (VerifyTorches())
         {
             Debug.Log("Bonne combinaison. Actionner balance");
-        }
-    }
 
-    public void toggleTorch(GameObject torch)
-    {
-        torchStates[torch] = !torchStates[torch];
+            balance.GetComponent<Rigidbody>().isKinematic = false;
+            balance.GetComponent<Rigidbody>().useGravity = true;
+
+            /*roof.GetComponent<Water_behavior>().waters[0].GetComponent<MeshRenderer>().enabled = true;
+            roof.GetComponent<Water_behavior>().waters[1].GetComponent<MeshRenderer>().enabled = true;
+            roof.GetComponent<Water_behavior>().waters[0].GetComponent<CapsuleCollider>().enabled = true;
+            roof.GetComponent<Water_behavior>().waters[1].GetComponent<CapsuleCollider>().enabled = true;*/
+
+            roof.SetActive(true);
+            balance.GetComponent<BalanceBoard_behavior>().StartCycle();
+        }
     }
 
     private bool VerifyTorches()
     {
         // La bonne combinaison est d'allumer la 1ere, 2e et 5e torche
-        if (torchStates[torches[0]] && torchStates[torches[1]] && torchStates[torches[4]])
+        if (torchStates[torches[0]] && torchStates[torches[1]] && !torchStates[torches[2]] && !torchStates[torches[3]] && torchStates[torches[4]])
         {
             return true;
         }

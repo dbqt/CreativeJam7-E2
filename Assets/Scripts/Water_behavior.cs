@@ -52,48 +52,22 @@ public class Water_behavior : MonoBehaviour
         }*/
 
         // Left water is frozen
-        if (waterStates[waters[0]])
-        {
-            waters[0].GetComponent<MeshRenderer>().enabled = false;
-            frozenWaters[0].GetComponent<MeshRenderer>().enabled = true;
-
-            waters[0].GetComponent<CapsuleCollider>().enabled = false;
-            frozenWaters[0].GetComponent<CapsuleCollider>().enabled = true;
-        }
-        else
-        {
-            waters[0].GetComponent<MeshRenderer>().enabled = true;
-            frozenWaters[0].GetComponent<MeshRenderer>().enabled = false;
-
-            waters[0].GetComponent<CapsuleCollider>().enabled = true;
-            frozenWaters[0].GetComponent<CapsuleCollider>().enabled = false;
-
-            balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[0]);
-        }
+        //if (!waterStates[waters[0]])
+        //{
+        //    // On ajoute de l'eau de l'autre côté
+        //    balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[1]);
+        //}
 
         // Right water is frozen
         if (waterStates[waters[1]])
         {
-            waters[1].GetComponent<MeshRenderer>().enabled = false;
-            frozenWaters[1].GetComponent<MeshRenderer>().enabled = true;
-
-            waters[1].GetComponent<CapsuleCollider>().enabled = false;
-            frozenWaters[1].GetComponent<CapsuleCollider>().enabled = true;
-        }
-        else
-        {
-            waters[1].GetComponent<MeshRenderer>().enabled = true;
-            frozenWaters[1].GetComponent<MeshRenderer>().enabled = false;
-
-            waters[1].GetComponent<CapsuleCollider>().enabled = true;
-            frozenWaters[1].GetComponent<CapsuleCollider>().enabled = false;
-
-            balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[1]);
+            // On ajoute plus d'eau de l'autre côté
+            balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[0]);
         }
     }
 
-    public void toggleWater(GameObject water)
+    public void toggleWater(GameObject water, bool state)
     {
-        waterStates[water] = !waterStates[water];
+        waterStates[water] = state;
     }
 }
