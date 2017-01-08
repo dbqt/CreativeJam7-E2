@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 
 	public Canvas menuCanvas;
     public Text target;
-	public GameObject player1Prefab, playerVRPrefab;
 
 	private GameObject playerInstance;
 
@@ -55,7 +54,6 @@ public class GameManager : MonoBehaviour
     
     public void LoadNextLevel()
     {
-		isVRMode = false;
         if (Levels.Length < 0) return;
 
         // Level 0 is menu
@@ -81,19 +79,8 @@ public class GameManager : MonoBehaviour
     }
 
 	public void ResetPlayers (){
-		playerInstance = Instantiate (isVRMode ? playerVRPrefab : player1Prefab, Vector3.zero, Quaternion.identity) as GameObject;
-	}
-
-	public void LoadNextVRLevel(){
-		isVRMode = true;
-		if (Levels.Length < 0) return;
-
-		// Level 0 is menu
-		CurrentLevel++;
-		Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
-		CurrentLevel = CurrentLevel%Levels.Length;
-		SceneManager.LoadScene(Levels[CurrentLevel]);
-		ResetPlayers ();
+		playerInstance.transform.position = Vector3.zero;
+		playerInstance.transform.rotation = Quaternion.identity;
 	}
 
 	public void SyncLevel(){

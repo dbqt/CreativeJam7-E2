@@ -27,8 +27,8 @@ public class Raft_behavior : MonoBehaviour
 
     void spawnWeight()
     {
-        Vector3 position = new Vector3(Random.Range(Corner3.transform.position.x, Corner1.transform.position.x), 500, Random.Range(Corner1.transform.position.z, Corner3.transform.position.z));
-        Instantiate(weight, position, Quaternion.identity);
+        Vector3 position = new Vector3(Random.Range(Corner3.transform.position.x, Corner1.transform.position.x), 10, Random.Range(Corner1.transform.position.z, Corner3.transform.position.z));
+		Instantiate(weight, position + this.transform.position, Quaternion.identity);
         Invoke("spawnWeight", spawnDelay);
         Debug.Log(position);
     }
