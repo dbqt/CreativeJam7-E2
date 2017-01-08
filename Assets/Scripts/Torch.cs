@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Torch : Flammable {
+public class Torch : Actionnable {
 
     public ParticleSystem Fire;
 
@@ -15,4 +15,6 @@ public class Torch : Flammable {
 
         behavior.toggleTorch(this.gameObject);
     }
+
+    // do nothing with ice action
 }

@@ -5,37 +5,61 @@ public class Geyser : MonoBehaviour {
     public GameObject[] platforms;
     public float minHeight = 0f, maxHeight = 10f, increment = 0.01f;
     float platform1Counter = 1, platform1CurrCounter = 0, platform2Counter = 1, platform2CurrCounter = 0, platform3Counter = 1, platform3CurrCounter = 0;
-    bool augmentPlatform1 = false, augmentPlatform2 = false, augmentPlatform3 = false;
+    bool augmentPlatform1 = false, augmentPlatform2 = false, augmentPlatform3 = false, platform1CanMove, platform2CanMove, platform3CanMove;
 
 	// Use this for initialization
 	void Start () {
         generateNewCounter(1);
         generateNewCounter(2);
         generateNewCounter(3);
+        platform1CanMove = true;
+        platform2CanMove = true;
+        platform3CanMove = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (augmentPlatform1) {
-            augmentHeight(1);
-            platform1CurrCounter += increment;
-        } else {
-            reduceHeight(1);
-            platform1CurrCounter += increment;
+
+        // PLATFORM 1
+        if (platform1CanMove)
+        {
+            if (augmentPlatform1)
+            {
+                augmentHeight(1);
+                platform1CurrCounter += increment;
+            }
+            else
+            {
+                reduceHeight(1);
+                platform1CurrCounter += increment;
+            }
         }
-        if (augmentPlatform2) {
-            augmentHeight(2);
-            platform2CurrCounter += increment;
-        } else {
-            reduceHeight(2);
-            platform2CurrCounter += increment;
+
+        // PLATFORM 2
+        if (platform2CanMove)
+        {
+            if (augmentPlatform2) {
+                augmentHeight(2);
+                platform2CurrCounter += increment;
+            } else {
+                reduceHeight(2);
+                platform2CurrCounter += increment;
+            }
         }
-        if (augmentPlatform3) {
-            augmentHeight(3);
-            platform3CurrCounter += increment;
-        } else {
-            reduceHeight(3);
-            platform3CurrCounter += increment;
+
+        // PLATFORM 3
+        if (platform3CanMove)
+        {
+            if (augmentPlatform3)
+            {
+                augmentHeight(3);
+                platform3CurrCounter += increment;
+            }
+            else
+            {
+                reduceHeight(3);
+                platform3CurrCounter += increment;
+            }
         }
         /*Debug.Log("PLATFORM1 CURR: " + platform1CurrCounter);
         Debug.Log("PLATFORM1: " + platform1Counter);
@@ -99,4 +123,19 @@ public class Geyser : MonoBehaviour {
 
     }
 
+    public void toggleCanMove(int platformNb)
+    {
+        switch (platformNb)
+        {
+            case 1:
+                platform1CanMove = !platform1CanMove;
+                break;
+            case 2:
+                platform2CanMove = !platform2CanMove;
+                break;
+            case 3:
+                platform3CanMove = !platform3CanMove;
+                break;
+        }
+    }
 }

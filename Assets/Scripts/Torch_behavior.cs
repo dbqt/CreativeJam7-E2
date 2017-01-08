@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class Torch_behavior : MonoBehaviour
 {
     public GameObject[] torches;
-    bool[] torchLightUp = new bool[5];
+    //bool[] torchLightUp = new bool[5];
     Dictionary<GameObject, bool> torchStates;
 
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            torchLightUp[i] = false;
-        }
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    torchLightUp[i] = false;
+        //}
 
         torchStates = new Dictionary<GameObject, bool>();
         foreach (GameObject torch in torches)
