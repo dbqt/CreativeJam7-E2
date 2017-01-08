@@ -1,27 +1,37 @@
 fileFormatVersion: 2
 guid: 96a548f085c899a4faddf5557426dfa0
-timeCreated: 1483852275
+timeCreated: 1483855759
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: rock_wall_01
-    100002: rock_wall_01_MeshPart0
-    100004: rock_wall_01_MeshPart1
-    100006: //RootNode
-    400000: rock_wall_01
-    400002: rock_wall_01_MeshPart0
-    400004: rock_wall_01_MeshPart1
-    400006: //RootNode
-    2300000: rock_wall_01_MeshPart0
-    2300002: rock_wall_01_MeshPart1
-    3300000: rock_wall_01_MeshPart0
-    3300002: rock_wall_01_MeshPart1
-    4300000: rock_wall_01_MeshPart0
-    4300002: rock_wall_01_MeshPart1
+    100000: rock_wall_011
+    100002: rock_wall_011_MeshPart0
+    100004: rock_wall_011_MeshPart1
+    100006: rock_wall_011_MeshPart2
+    100008: rock_wall_011_MeshPart3
+    100010: //RootNode
+    400000: rock_wall_011
+    400002: rock_wall_011_MeshPart0
+    400004: rock_wall_011_MeshPart1
+    400006: rock_wall_011_MeshPart2
+    400008: rock_wall_011_MeshPart3
+    400010: //RootNode
+    2300000: rock_wall_011_MeshPart0
+    2300002: rock_wall_011_MeshPart1
+    2300004: rock_wall_011_MeshPart2
+    2300006: rock_wall_011_MeshPart3
+    3300000: rock_wall_011_MeshPart0
+    3300002: rock_wall_011_MeshPart1
+    3300004: rock_wall_011_MeshPart2
+    3300006: rock_wall_011_MeshPart3
+    4300000: rock_wall_011_MeshPart0
+    4300002: rock_wall_011_MeshPart1
+    4300004: rock_wall_011_MeshPart2
+    4300006: rock_wall_011_MeshPart3
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 2
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -43,7 +53,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
