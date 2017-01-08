@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
 	public GameObject playerInstance, vrPlayer;
 
 	public bool isVRMode = false;
+    public AudioClip[] audiosounds;
+    public AudioSource audioSource;
 
-	private AsyncOperation currentOperation;
+    private AsyncOperation currentOperation;
 	private bool newOperation = false;
 
 
@@ -39,7 +41,16 @@ public class GameManager : MonoBehaviour
 		} else {
 			playerInstance.SetActive (true);
 			vrPlayer.SetActive (false);
-		}
+        }
+        this.audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        //playMusic(0);
+    }
+
+    public void playMusic(int musicNb)
+    {
+        Debug.Log("PLAYING MUSIC " + musicNb);
+        audioSource.clip = audiosounds[musicNb];
+        audioSource.Play();
     }
 
 	void Update(){
@@ -57,6 +68,7 @@ public class GameManager : MonoBehaviour
     
     public void ReturnToMenu()
     {
+        GameManager.instance.playMusic(0);
         CurrentLevel = 0;
         SceneManager.LoadScene(Levels[CurrentLevel]);
     }
