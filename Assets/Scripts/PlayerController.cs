@@ -15,12 +15,18 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject IceStaff;
 
+    public AudioSource fireAudio, iceAudio;
+    public AudioClip fireSound, iceSound;
+
     public float moveSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        this.fireAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        fireAudio.clip = fireSound;
+        this.iceAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        iceAudio.clip = iceSound;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,23 +40,29 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButtonDown ("Fire1")) {
 			Fire.Play ();
+            fireAudio.loop = true;
+            fireAudio.Play();
             FireStaff.GetComponent<CapsuleCollider>().enabled = true;                                      
 		} 
 
 		if (Input.GetButtonUp("Fire1")) {
 			Fire.Stop ();
+            fireAudio.Stop();
             FireStaff.GetComponent<CapsuleCollider>().enabled = false;
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
+            iceAudio.loop = true;
             Ice.Play();
+            iceAudio.Play();
             IceStaff.GetComponent<CapsuleCollider>().enabled = true;
         }
 
         if (Input.GetButtonUp("Fire2"))
         {
             Ice.Stop();
+            iceAudio.Stop();
             IceStaff.GetComponent<CapsuleCollider>().enabled = false;
         }
 

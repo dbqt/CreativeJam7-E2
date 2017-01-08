@@ -394,6 +394,8 @@ MonoBehaviour:
   scene2: {fileID: 1980280594}
   scene3: {fileID: 1898256201}
   anim: {fileID: 1287292788}
+  soundS: {fileID: 0}
+  pageFlip: {fileID: 8300000, guid: bddd998cbb7f6f24bbd05058eca48a72, type: 3}
 --- !u!1 &1287292783
 GameObject:
   m_ObjectHideFlags: 0

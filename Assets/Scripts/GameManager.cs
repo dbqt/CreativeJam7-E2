@@ -74,32 +74,39 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
-    
+
     public void LoadNextLevel()
     {
         if (Levels.Length < 0) return;
 
-		if (isVRMode) {
-			playerInstance.SetActive (false);
-			vrPlayer.SetActive (true);
-		} else {
-			playerInstance.SetActive (true);
-			vrPlayer.SetActive (false);
-		}
-
         // Level 0 is menu
         CurrentLevel++;
         Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
-        CurrentLevel = CurrentLevel%Levels.Length;
-        if(CurrentLevel == 2)
+        CurrentLevel = CurrentLevel % Levels.Length;
+        if (CurrentLevel == 2)
         {
             playMusic(0);
         }
-        if(CurrentLevel == 0)
+        if (CurrentLevel == 1 || CurrentLevel == 0)
         {
             playerInstance.SetActive(false);
             vrPlayer.SetActive(false);
-            playMusic(1);
+            if (CurrentLevel == 0)
+            {
+                playMusic(1);
+            }
+        } else
+        {
+            if (isVRMode)
+            {
+                playerInstance.SetActive(false);
+                vrPlayer.SetActive(true);
+            }
+            else
+            {
+                playerInstance.SetActive(true);
+                vrPlayer.SetActive(false);
+            }
         }
 		currentOperation = SceneManager.LoadSceneAsync(Levels[CurrentLevel]);
 		newOperation = true;

@@ -5,11 +5,20 @@ public class ShowIntro : MonoBehaviour {
     public GameObject scene1, scene2, scene3;
     public Animator anim;
     int state = 0;
+    public AudioSource soundS;
+    public AudioClip pageFlip;
 
-	// Use this for initialization
-	void Start () {
-	}
-	
+    // Use this for initialization
+    void Start() {
+        this.soundS = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        soundS.clip = pageFlip;
+    }
+
+    void playPageFlip()
+    {
+        soundS.Play();
+    }
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -17,6 +26,7 @@ public class ShowIntro : MonoBehaviour {
 
     public void showNext() {
         Debug.Log("Showing Next");
+        playPageFlip();
         switch (state)
         {
             case 0:
