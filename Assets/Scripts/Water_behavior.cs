@@ -52,22 +52,27 @@ public class Water_behavior : MonoBehaviour
         }*/
 
         // Left water is frozen
-        if (!waterStates[waters[0]])
-        {
-            // On ajoute de l'eau de l'autre côté
-            balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[0]);
-        }
+        //if (!waterStates[waters[0]])
+        //{
+        //    // On ajoute de l'eau de l'autre côté
+        //    balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[0]);
+        //}
 
-        // Right water is frozen
-        if (!waterStates[waters[1]])
-        {
-            // On ajoute plus d'eau de l'autre côté
-            balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[1]);
-        }
+        //// Right water is frozen
+        //if (!waterStates[waters[1]])
+        //{
+        //    // On ajoute plus d'eau de l'autre côté
+        //    balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[1]);
+        //}
     }
 
     public void toggleWater(GameObject water, bool state)
     {
         waterStates[water] = state;
+
+        if (!waterStates[waters[1]] && waterStates[waters[0]])
+        {
+            // appel de fonction pour animation
+        }
     }
 }
