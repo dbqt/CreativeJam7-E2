@@ -35,20 +35,17 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(this.gameObject);
-		if (isVRMode) {
-			playerInstance.SetActive (false);
-			vrPlayer.SetActive (true);
-		} else {
-			playerInstance.SetActive (true);
-			vrPlayer.SetActive (false);
-        }
+        playerInstance.SetActive(false);
+        vrPlayer.SetActive(false);
+
         this.audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
-        //playMusic(0);
+        playMusic(1);
     }
 
     public void playMusic(int musicNb)
     {
         Debug.Log("PLAYING MUSIC " + musicNb);
+        audioSource.Stop();
         audioSource.clip = audiosounds[musicNb];
         audioSource.Play();
     }
@@ -94,6 +91,16 @@ public class GameManager : MonoBehaviour
         CurrentLevel++;
         Debug.Log("HEADING TO NEXT LEVEL " + CurrentLevel);
         CurrentLevel = CurrentLevel%Levels.Length;
+        if(CurrentLevel == 2)
+        {
+            playMusic(0);
+        }
+        if(CurrentLevel == 0)
+        {
+            playerInstance.SetActive(false);
+            vrPlayer.SetActive(false);
+            playMusic(1);
+        }
 		currentOperation = SceneManager.LoadSceneAsync(Levels[CurrentLevel]);
 		newOperation = true;
 
