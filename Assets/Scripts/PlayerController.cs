@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
         {
             //this.gameObject.GetComponents<AudioSource>()[1].Play();
             //DEATH SCREAM
-            GameManager.instance.ShowGameOver();
+            GameManager.instance.ResetPlayers();
         }
     }
 }
