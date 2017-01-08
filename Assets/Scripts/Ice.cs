@@ -20,7 +20,7 @@ public class Ice : Actionnable {
 
         water.GetComponent<CapsuleCollider>().enabled = true;
 
-        roof.GetComponent<Water_behavior>().toggleWater(this.gameObject, false);
+        roof.GetComponent<Water_behavior>().toggleWater(water, false);
     }
     /*public override void IceAction()
     {
