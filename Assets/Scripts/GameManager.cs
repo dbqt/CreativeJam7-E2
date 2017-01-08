@@ -63,7 +63,18 @@ public class GameManager : MonoBehaviour
 		CurrentLevel = 0;
 		CreateGameAndWait ();
     }
+    
+    public void ReturnToMenu()
+    {
+        CurrentLevel = 0;
+        SceneManager.LoadScene(Levels[CurrentLevel]);
+    }
 
+    public void ShowGameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+    
 	//[Command]
     public void LoadNextLevel()
     {
@@ -89,6 +100,11 @@ public class GameManager : MonoBehaviour
     public void ShowTarget()
     {
         target.enabled = true;
+    }
+
+    public void RedoLevel()
+    {
+        SceneManager.LoadScene(Levels[CurrentLevel]);
     }
 
 	private void CreateGameAndWait (){

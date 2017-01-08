@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!this.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
+		//if (!this.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
 
 		var move = new Vector3 (Input.GetAxis ("Horizontal"), 0f, Input.GetAxis ("Vertical"));
 		move *= moveSpeed;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 
 		Head.transform.Rotate (rotationHead);
 
-		Head.transform.rotation = ClampRotationAroundXAxis (Head.transform.rotation, -15f, 15f);
+		Head.transform.rotation = ClampRotationAroundXAxis (Head.transform.rotation, -45f, 15f);
 		var rot = Head.transform.localEulerAngles;
 		rot.y = 0f;
 		rot.z = 0f;
@@ -71,4 +71,19 @@ public class PlayerController : MonoBehaviour {
 
 		return q;
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Trigger enter with "+other.gameObject.name);
+        if (other.gameObject.tag == "Exit")
+        {
+            GameManager.instance.LoadNextLevel();
+        }
+        if (other.gameObject.tag == "Death")
+        {
+            //this.gameObject.GetComponents<AudioSource>()[1].Play();
+            //DEATH SCREAM
+            GameManager.instance.ShowGameOver();
+        }
+    }
 }

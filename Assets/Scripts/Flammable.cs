@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Flammable : MonoBehaviour {
-	public virtual void Action() {
+	public virtual void FireAction() {
 		Debug.Log ("action trigger!");
 	}
 }
