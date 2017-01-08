@@ -17,7 +17,7 @@ public class BalanceBoard_behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(gameObject.transform.eulerAngles.z);
     }
 
     public void addForce(GameObject forceTarget)
@@ -37,8 +37,8 @@ public class BalanceBoard_behavior : MonoBehaviour
 
     void balanceCheck()
     {
-        float errorMarginLow = -0.5f; //Adjust as needed.
-        float errorMarginHigh = 0.5f;
+        float errorMarginLow = -0.25f; //Adjust as needed.
+        float errorMarginHigh = 0.25f;
         if (errorMarginLow < gameObject.transform.eulerAngles.z && errorMarginHigh > gameObject.transform.eulerAngles.z)
         {
             gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
