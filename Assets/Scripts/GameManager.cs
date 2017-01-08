@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 	public Canvas menuCanvas;
     public Text target;
 	public GameObject player1Prefab, playerVRPrefab;
+	public bool isPlayerOne = false;
 
 	private bool hasCreated = false;
 	private bool isWaiting = false;
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
 		CurrentLevel = 0;
 		//InstantiatePlayer1 ();
 		networkManager.playerNumber = 1;
+		isPlayerOne = true;
 		CreateGameAndWait ();
     }
 

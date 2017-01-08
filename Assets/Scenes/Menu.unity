@@ -334,6 +334,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 450349238}
+--- !u!114 &497451710 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010379170156, guid: 7dc9b719a92ff6e4897b5692cd8b8531,
+    type: 2}
+  m_PrefabInternal: {fileID: 701523461}
+  m_Script: {fileID: 11500000, guid: 97c8483ff3b28e142bf8011e8c8da4c2, type: 3}
 --- !u!1 &538955277
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +666,7 @@ MonoBehaviour:
   - Level2
   CurrentLevel: 0
   networkCalls: {fileID: 1861241961}
-  networkManager: {fileID: 0}
+  networkManager: {fileID: 497451710}
   menuCanvas: {fileID: 1412704369}
   target: {fileID: 1903011066}
   player1Prefab: {fileID: 1000010432852530, guid: 86eee2f6939a2fb4e8c7f98530e17027,
