@@ -2,19 +2,18 @@
 using System.Collections;
 
 public class Geyser : MonoBehaviour {
-    public GameObject[] platforms;
-    public float minHeight = 0f, maxHeight = 10f, increment = 0.01f;
-    float platform1Counter = 1, platform1CurrCounter = 0, platform2Counter = 1, platform2CurrCounter = 0, platform3Counter = 1, platform3CurrCounter = 0;
-    bool augmentPlatform1 = false, augmentPlatform2 = false, augmentPlatform3 = false, platform1CanMove, platform2CanMove, platform3CanMove;
+    public GameObject platform;
+    public float increment = 0.2f, difference = 10f;
+    float minHeight, maxHeight;
+    float platform1Counter = 1, platform1CurrCounter = 0;
+    bool augmentPlatform1 = false, platform1CanMove;
 
 	// Use this for initialization
 	void Start () {
-        generateNewCounter(1);
-        generateNewCounter(2);
-        generateNewCounter(3);
+        generateNewCounter();
+        minHeight = platform.transform.position.y - difference;
+        maxHeight = platform.transform.position.y + difference;
         platform1CanMove = true;
-        platform2CanMove = true;
-        platform3CanMove = true;
     }
 	
 	// Update is called once per frame
@@ -25,40 +24,13 @@ public class Geyser : MonoBehaviour {
         {
             if (augmentPlatform1)
             {
-                augmentHeight(1);
+                augmentHeight();
                 platform1CurrCounter += increment;
             }
             else
             {
-                reduceHeight(1);
+                reduceHeight();
                 platform1CurrCounter += increment;
-            }
-        }
-
-        // PLATFORM 2
-        if (platform2CanMove)
-        {
-            if (augmentPlatform2) {
-                augmentHeight(2);
-                platform2CurrCounter += increment;
-            } else {
-                reduceHeight(2);
-                platform2CurrCounter += increment;
-            }
-        }
-
-        // PLATFORM 3
-        if (platform3CanMove)
-        {
-            if (augmentPlatform3)
-            {
-                augmentHeight(3);
-                platform3CurrCounter += increment;
-            }
-            else
-            {
-                reduceHeight(3);
-                platform3CurrCounter += increment;
             }
         }
         /*Debug.Log("PLATFORM1 CURR: " + platform1CurrCounter);
@@ -67,75 +39,45 @@ public class Geyser : MonoBehaviour {
         Debug.Log("PLATFORM2: " + platform2Counter);
         Debug.Log("PLATFORM3 CURR: " + platform3CurrCounter);
         Debug.Log("PLATFORM3: " + platform3Counter);*/
-        verifyCounters();
+        verifyCounter();
     }
 
-    void verifyCounters()
+    void verifyCounter()
     {
-        if(platform1Counter <= platform1CurrCounter || platforms[0].transform.position.y >= maxHeight || platforms[0].transform.position.y <= minHeight) { generateNewCounter(1);}
-        if (platform2Counter <= platform2CurrCounter || platforms[1].transform.position.y >= maxHeight || platforms[1].transform.position.y <= minHeight) { generateNewCounter(2);}
-        if (platform3Counter <= platform3CurrCounter || platforms[2].transform.position.y >= maxHeight || platforms[2].transform.position.y <= minHeight) { generateNewCounter(3);}
+        if(platform1Counter <= platform1CurrCounter || platform.transform.position.y >= maxHeight || platform.transform.position.y <= minHeight) { generateNewCounter();}
     }
 
-    void generateNewCounter(int nb)
+    void generateNewCounter()
     {
-        switch (nb)
-        {
-            case 1:
-                platform1Counter = Random.Range( 0.5f , (maxHeight - minHeight) /2);
-                platform1CurrCounter = 0;
-                int temp = Random.Range(0, 2);
-                augmentPlatform1 = ( temp == 0);
-                break;
-            case 2:
-                platform2Counter = Random.Range(0.5f, (maxHeight - minHeight)/2);
-                platform2CurrCounter = 0;
-                augmentPlatform2 = (Random.Range(0, 2) == 0);
-                break;
-            case 3:
-                platform3Counter = Random.Range(0.5f, (maxHeight - minHeight)/2);
-                platform3CurrCounter = 0;
-                augmentPlatform3 = (Random.Range(0, 2) == 0);
-                break;
-        }
+        platform1Counter = Random.Range( 0.5f , (maxHeight - minHeight) /2);
+        platform1CurrCounter = 0;
+        int temp = Random.Range(0, 2);
+        augmentPlatform1 = ( temp == 0);
     }
 
-    void augmentHeight(int platformNumber)
+    void augmentHeight()
     {
-        platformNumber--;
         //Debug.Log("Augmenting height of " + platformNumber + " with currentHeight " + platforms[platformNumber].transform.position.y);
-        if (platforms[platformNumber].transform.position.y >= maxHeight) return;
-        Vector3 tempVector = platforms[platformNumber].transform.position;
+        if (platform.transform.position.y >= maxHeight) return;
+        Vector3 tempVector = platform.transform.position;
         float temp = tempVector.y +increment;
         tempVector.y = temp;
-        platforms[platformNumber].transform.position = tempVector;
+        platform.transform.position = tempVector;
     }
 
-    void reduceHeight(int platformNumber)
+    void reduceHeight()
     {
-        platformNumber--;
         //Debug.Log("Reducing height of " + platformNumber + " with currentHeight " + platforms[platformNumber].transform.position.y);
-        if (platforms[platformNumber].transform.position.y <= minHeight) return;
-        Vector3 tempVector = platforms[platformNumber].transform.position;
+        if (platform.transform.position.y <= minHeight) return;
+        Vector3 tempVector = platform.transform.position;
         float temp = tempVector.y - increment;
         tempVector.y = temp;
-        platforms[platformNumber].transform.position = tempVector;
+        platform.transform.position = tempVector;
 
     }
 
-    public void toggleCanMove(int platformNb)
+    public void toggleCanMove()
     {
-        switch (platformNb)
-        {
-            case 1:
-                platform1CanMove = !platform1CanMove;
-                break;
-            case 2:
-                platform2CanMove = !platform2CanMove;
-                break;
-            case 3:
-                platform3CanMove = !platform3CanMove;
-                break;
-        }
+            platform1CanMove = !platform1CanMove;
     }
 }
