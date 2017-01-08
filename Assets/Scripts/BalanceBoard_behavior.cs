@@ -17,7 +17,7 @@ public class BalanceBoard_behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(gameObject.transform.eulerAngles.z);
+
     }
 
     public void addForce(GameObject forceTarget)
