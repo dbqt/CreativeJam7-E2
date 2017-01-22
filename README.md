@@ -7,7 +7,7 @@ This project created for the Creative Jam #7 in 48 hours. The theme was "Balance
 
 The first player plays using a pc controller. He controls a member of the tribe that has fire and ice powers. The second player is a spirit accompanying the first player in the trial. Using VR, the second player will have to look around in the spiritual world to find clues for the trial taker.
 
-The trial is a serie of puzzle involving balance in different ways.
+The trial is a serie of puzzles involving balance in different ways.
 Here are some levels: 
 ![Imgur](http://i.imgur.com/k55b7fM.png)
 ![Imgur](http://i.imgur.com/bcNSOWV.png)
