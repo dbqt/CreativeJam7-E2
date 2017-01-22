@@ -19,7 +19,7 @@ Here are some levels:
 - Yvan Luu - Programmer
 - Pierre To	- Programmer
 - Peter Tran - 3D Artist
-- Patricia Lan-Anh Duong - 2D Artist
+- Patricia Lan-Anh Duong - 2D Artist & Sound designer
 
 
 
