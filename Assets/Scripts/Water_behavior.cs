@@ -7,6 +7,8 @@ public class Water_behavior : MonoBehaviour
     public GameObject[] waters;
     public GameObject[] frozenWaters;
 
+    public GameObject endGameWall, crystal;
+
     //bool[] waterFrozen = new bool[2];
     Dictionary<GameObject, bool> waterStates;
 
@@ -74,6 +76,10 @@ public class Water_behavior : MonoBehaviour
 
 		balance.GetComponent<Animator> ().SetBool ("isBalanced", waterStates [waters [1]] && !waterStates [waters [0]]);
 		if(waterStates [waters [1]] && !waterStates [waters [0]])
-			{doorOpening.SetTrigger ("openDoorLevel2");}
+			{
+                doorOpening.SetTrigger ("openDoorLevel2");
+                endGameWall.GetComponent<Collider>().isTrigger = true;
+                crystal.SetActive(true);
+            }
     }
 }

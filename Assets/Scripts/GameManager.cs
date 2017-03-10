@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
         this.audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
         playMusic(1);
+        audioSource.loop = true;
     }
 
     public void playMusic(int musicNb)
@@ -133,7 +134,9 @@ public class GameManager : MonoBehaviour
 			vrPlayer.transform.position = o.transform.position;
 			vrPlayer.transform.rotation = o.transform.rotation;
 		} else {
-			playerInstance.transform.position = Vector3.zero;
+            var o = GameObject.Find ("PLAYERSTART");
+            if(o == null) return;
+			playerInstance.transform.position = o.transform.position;
 			playerInstance.transform.rotation = Quaternion.identity;
 		}
 	}

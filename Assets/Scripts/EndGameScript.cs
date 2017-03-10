@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EndGameScript : MonoBehaviour {
 
+
     // Use this for initialization
     void Start() {
 
@@ -13,8 +14,12 @@ public class EndGameScript : MonoBehaviour {
 
     }
 
+    void OnTriggerEnter(Collider other) {
+        GameManager.instance.LoadNextLevel();
+    }
+
     public void returnToMenu()
     {
-        GameManager.instance.ReturnToMenu();
+        //GameManager.instance.ReturnToMenu();
     }
 }

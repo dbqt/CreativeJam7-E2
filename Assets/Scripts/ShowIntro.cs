@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class ShowIntro : MonoBehaviour {
     public GameObject scene1, scene2, scene3;
