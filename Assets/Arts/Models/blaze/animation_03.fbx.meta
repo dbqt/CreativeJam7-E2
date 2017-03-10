@@ -42,7 +42,8 @@ ModelImporter:
     4300008: polySurface18
     4300010: polySurface19
     4300012: polySurface20
-    7400000: Take 001
+    7400000: Walk
+    7400002: Staff
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -64,7 +65,95 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 26
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: polySurface12
+        weight: 1
+      - path: polySurface15
+        weight: 1
+      - path: polySurface15/polySurface16
+        weight: 1
+      - path: polySurface17
+        weight: 1
+      - path: polySurface18
+        weight: 1
+      - path: polySurface19
+        weight: 1
+      - path: polySurface20
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Staff
+      takeName: Take 001
+      firstFrame: 26
+      lastFrame: 35
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: polySurface12
+        weight: 1
+      - path: polySurface15
+        weight: 1
+      - path: polySurface15/polySurface16
+        weight: 1
+      - path: polySurface17
+        weight: 1
+      - path: polySurface18
+        weight: 1
+      - path: polySurface19
+        weight: 1
+      - path: polySurface20
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
