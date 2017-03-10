@@ -2,6 +2,10 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
+
 public class GameManager : MonoBehaviour
 
 {
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour
     private AsyncOperation currentOperation;
 	private bool newOperation = false;
 
+    private DatabaseReference reference;
 
     // Use this for initialization
     void Start() {
@@ -41,6 +46,11 @@ public class GameManager : MonoBehaviour
         this.audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
         playMusic(1);
         audioSource.loop = true;
+
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://trials-of-fire-and-ice.firebaseio.com/");
+        // Get the root reference location of the database.
+        reference= FirebaseDatabase.DefaultInstance.RootReference;
+  
     }
 
     public void playMusic(int musicNb)
@@ -56,6 +66,8 @@ public class GameManager : MonoBehaviour
 			ResetPlayers ();
 			newOperation = false;
 		}
+
+        SyncVR();
 
 	}
 
@@ -130,9 +142,9 @@ public class GameManager : MonoBehaviour
 
 	public void ResetPlayers (){
 		if (isVRMode) {
-			var o = GameObject.Find ("VRSPOT");
+			/*var o = GameObject.Find ("VRSPOT :evel");
 			vrPlayer.transform.position = o.transform.position;
-			vrPlayer.transform.rotation = o.transform.rotation;
+			vrPlayer.transform.rotation = o.transform.rotation;*/
 		} else {
             var o = GameObject.Find ("PLAYERSTART");
             if(o == null) return;
@@ -141,8 +153,58 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void SyncLevel(){
-	
+	public void SyncVR(){
+        if(isVRMode){
+            FirebaseDatabase.DefaultInstance
+      .GetReference("DataVR")
+      .GetValueAsync().ContinueWith(task => {
+        if (task.IsFaulted) {
+          // Handle the error...
+          Debug.Log("i didnt work");
+        }
+        else if (task.IsCompleted) {
+          DataSnapshot snapshot = task.Result;
+          // Do something with snapshot...
+          string json = snapshot.GetRawJsonValue();
+          DataVR data = JsonUtility.FromJson<DataVR>(json);
+          Debug.Log("x: "+data.playerPositionX);
+        }
+      });
+        }
+        else{
+        	DataVR data = new DataVR(){
+                playerPositionX = playerInstance.transform.position.x,
+                playerPositionY = playerInstance.transform.position.y,
+                playerPositionZ = playerInstance.transform.position.z,
+                isVRSpot1 = true,
+                isBalanced = false,
+                torch1 = false,
+                torch2 = false,
+                torch3 = false,
+                torch4 = false,
+                torch5 = false
+            };
+            string json = JsonUtility.ToJson(data);
+
+            reference.Child("DataVR").SetRawJsonValueAsync(json);
+        }
 	}
+
+    public void PlaceVRSpot1(){
+
+    }
+
+    public void PlaceVRSpot2(){
+
+    }
 		
+}
+
+public class DataVR {
+    public float playerPositionX, playerPositionY, playerPositionZ;
+    public bool isVRSpot1;
+    public bool isBalanced;
+    public bool torch1, torch2, torch3, torch4, torch5;
+
+    public DataVR() { }
 }
