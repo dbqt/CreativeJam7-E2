@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
             var o = GameObject.Find ("PLAYERSTART");
             if(o == null) return;
 			playerInstance.transform.position = o.transform.position;
-			playerInstance.transform.rotation = Quaternion.identity;
+			playerInstance.transform.rotation = o.transform.rotation;
 		}
 	}
 

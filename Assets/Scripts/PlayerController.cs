@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 1f;
 
+	public Animator blazeAnimator;
+
 	// Use this for initialization
 	void Start () {
         this.fireAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
@@ -34,6 +36,12 @@ public class PlayerController : MonoBehaviour {
 
 		var move = new Vector3 (Input.GetAxis ("Horizontal"), 0f, Input.GetAxis ("Vertical"));
 		move *= moveSpeed;
+
+		if (move != Vector3.zero) {
+			blazeAnimator.SetBool ("isWalking", true);
+		} else {
+			blazeAnimator.SetBool ("isWalking", false);
+		}
 
 		var rotationBody = new Vector3 (0f, Input.GetAxis ("HorizontalRight"), 0f);
 		var rotationHead = new Vector3 (Input.GetAxis ("VerticalRight"), 0f, 0f);
