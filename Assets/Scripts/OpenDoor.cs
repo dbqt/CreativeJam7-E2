@@ -13,6 +13,7 @@ public class OpenDoor : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
         soundS.Play();
+GameManager.instance.playerIsVRSpot1 = false;
 		this.gameObject.GetComponent<Animator> ().SetBool ("isDoorOpen", true);
 	}
 

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 	public Canvas menuCanvas;
     public Text target;
 
-	public GameObject playerInstance, vrPlayer;
+	public GameObject playerInstance, vrPlayer, vrPlayerGhost;
 
 	public bool isVRMode = false;
     public AudioClip[] audiosounds;
@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
 	private bool newOperation = false;
 
     private DatabaseReference reference;
+    
+    //data to sync
+    public bool t1, t2, t3, t4, t5, balanced, playerIsVRSpot1;
 
     // Use this for initialization
     void Start() {
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         playerInstance.SetActive(false);
         vrPlayer.SetActive(false);
+        vrPlayerGhost.SetActive(false);
+        Reset();
 
         this.audioSource = (gameObject.AddComponent<AudioSource>() as AudioSource);
         playMusic(1);
@@ -70,16 +75,32 @@ public class GameManager : MonoBehaviour
         SyncVR();
 
 	}
+    public void Reset(){
+         t1 = false;
+        t2 = false;
+        t3 = false;
+        t4 = false;
+        t5 = false;
+        balanced = false;
+        playerIsVRSpot1 = true;
+    }
 
     public void StartNewGame()
     {
 		CurrentLevel = 0;
+       Reset();
+
+       if(isVRMode){
+        CurrentLevel = 1;
+        LoadNextLevel();
+       }
     }
     
     public void ReturnToMenu()
     {
         GameManager.instance.playMusic(0);
         CurrentLevel = 0;
+        Reset();
         SceneManager.LoadScene(Levels[CurrentLevel]);
     }
 
@@ -91,6 +112,12 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         if (Levels.Length < 0) return;
+
+        Reset();
+
+        if(isVRMode){
+        CurrentLevel = 1;
+       }
 
         // Level 0 is menu
         CurrentLevel++;
@@ -104,6 +131,7 @@ public class GameManager : MonoBehaviour
         {
             playerInstance.SetActive(false);
             vrPlayer.SetActive(false);
+            vrPlayerGhost.SetActive(false);
             if (CurrentLevel == 0)
             {
                 playMusic(1);
@@ -114,11 +142,13 @@ public class GameManager : MonoBehaviour
             {
                 playerInstance.SetActive(false);
                 vrPlayer.SetActive(true);
+                vrPlayerGhost.SetActive(true);
             }
             else
             {
                 playerInstance.SetActive(true);
                 vrPlayer.SetActive(false);
+                vrPlayerGhost.SetActive(false);
             }
         }
 		currentOperation = SceneManager.LoadSceneAsync(Levels[CurrentLevel]);
@@ -138,9 +168,11 @@ public class GameManager : MonoBehaviour
     public void RedoLevel()
     {
         SceneManager.LoadScene(Levels[CurrentLevel]);
+        Reset();
     }
 
 	public void ResetPlayers (){
+        Reset();
 		if (isVRMode) {
 			/*var o = GameObject.Find ("VRSPOT :evel");
 			vrPlayer.transform.position = o.transform.position;
@@ -154,35 +186,52 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void SyncVR(){
-        if(isVRMode){
-            FirebaseDatabase.DefaultInstance
-      .GetReference("DataVR")
-      .GetValueAsync().ContinueWith(task => {
-        if (task.IsFaulted) {
-          // Handle the error...
-          Debug.Log("i didnt work");
+        if(isVRMode) {
+            FirebaseDatabase.DefaultInstance.GetReference("DataVR").GetValueAsync().ContinueWith(task => 
+            {
+                if (task.IsFaulted) {
+                  // Handle the error...
+                  Debug.Log("i didnt work");
+                }
+                else if (task.IsCompleted) {
+                    DataSnapshot snapshot = task.Result;
+                    // Do something with snapshot...
+                    string json = snapshot.GetRawJsonValue();
+                    DataVR data = JsonUtility.FromJson<DataVR>(json);
+                    Debug.Log("synced");
+                    // place self at vr spot
+                    VRManager vrManager = FindObjectOfType(typeof(VRManager)) as VRManager;
+                    if(vrManager != null){
+                        Debug.Log("found");
+                        vrPlayer.transform.position = (playerIsVRSpot1) ? vrManager.vrspot1.position : vrManager.vrspot2.position;
+                        vrPlayer.transform.rotation = (playerIsVRSpot1) ? vrManager.vrspot1.rotation : vrManager.vrspot2.rotation;
+                    }
+                    // place player ghost
+                    vrPlayerGhost.transform.position = new Vector3(data.playerPositionX, data.playerPositionY, data.playerPositionZ);
+                    // sync level data
+                    playerIsVRSpot1 = data.isVRSpot1;
+                    balanced = data.isBalanced;
+                    t1 = data.torch1;
+                    t2 = data.torch2;
+                    t3 = data.torch3;
+                    t4 = data.torch4;
+                    t5 = data.torch5;
+                }
+            });
         }
-        else if (task.IsCompleted) {
-          DataSnapshot snapshot = task.Result;
-          // Do something with snapshot...
-          string json = snapshot.GetRawJsonValue();
-          DataVR data = JsonUtility.FromJson<DataVR>(json);
-          Debug.Log("x: "+data.playerPositionX);
-        }
-      });
-        }
+        // send to srever
         else{
         	DataVR data = new DataVR(){
                 playerPositionX = playerInstance.transform.position.x,
                 playerPositionY = playerInstance.transform.position.y,
                 playerPositionZ = playerInstance.transform.position.z,
-                isVRSpot1 = true,
-                isBalanced = false,
-                torch1 = false,
-                torch2 = false,
-                torch3 = false,
-                torch4 = false,
-                torch5 = false
+                isVRSpot1 = playerIsVRSpot1,
+                isBalanced = balanced,
+                torch1 = t1,
+                torch2 = t2,
+                torch3 = t3,
+                torch4 = t4,
+                torch5 = t5
             };
             string json = JsonUtility.ToJson(data);
 
@@ -190,12 +239,24 @@ public class GameManager : MonoBehaviour
         }
 	}
 
-    public void PlaceVRSpot1(){
+    public void SetBalanceData(bool balanced){
+        this.balanced = balanced;
+    }
 
+    public void SetTorchesData(bool t1, bool t2, bool t3, bool t4, bool t5){
+        this.t1 = t1;
+        this.t2 = t2;
+        this.t3 = t3;
+        this.t4 = t4;
+        this.t5 = t5;
+    }
+
+    public void PlaceVRSpot1(){
+        playerIsVRSpot1 = true;
     }
 
     public void PlaceVRSpot2(){
-
+        playerIsVRSpot1 = false;
     }
 		
 }

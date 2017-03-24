@@ -16,9 +16,12 @@ public class Water_behavior : MonoBehaviour
 
 	public Animator doorOpening;
 
+    private bool completed = false;
+
     // Use this for initialization
     void Start()
     {
+        completed = false;
         /*for (int i = 0; i < waterFrozen.Length; i++)
         {
             waterFrozen[i] = true;
@@ -68,6 +71,12 @@ public class Water_behavior : MonoBehaviour
         //    // On ajoute plus d'eau de l'autre côté
         //    balance.GetComponent<BalanceBoard_behavior>().addForce(balance.GetComponent<BalanceBoard_behavior>().weights[1]);
         //}
+
+        if(GameManager.instance != null){
+            if(GameManager.instance.isVRMode && GameManager.instance.balanced && !completed) {
+                CompletedLevel();
+            }
+        }
     }
 
     public void toggleWater(GameObject water, bool state)
@@ -77,9 +86,20 @@ public class Water_behavior : MonoBehaviour
 		balance.GetComponent<Animator> ().SetBool ("isBalanced", waterStates [waters [1]] && !waterStates [waters [0]]);
 		if(waterStates [waters [1]] && !waterStates [waters [0]])
 			{
-                doorOpening.SetTrigger ("openDoorLevel2");
-                endGameWall.GetComponent<Collider>().isTrigger = true;
-                crystal.SetActive(true);
+                CompletedLevel();
             }
+    }
+
+    public void CompletedLevel(){
+        completed = true;
+        doorOpening.SetTrigger ("openDoorLevel2");
+        endGameWall.GetComponent<Collider>().isTrigger = true;
+        crystal.SetActive(true);
+
+        if(GameManager.instance != null){
+            if(!GameManager.instance.isVRMode){
+                GameManager.instance.balanced = true;
+            }
+        }
     }
 }

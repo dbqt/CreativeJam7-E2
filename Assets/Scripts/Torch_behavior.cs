@@ -39,6 +39,18 @@ public class Torch_behavior : MonoBehaviour
                 Debug.Log("Torch" + torch.Key + "is lit");
             }
         }
+
+        if(GameManager.instance != null){
+            if(GameManager.instance.isVRMode){
+                if(GameManager.instance.t1) {torches[0].GetComponent<Torch>().FireAction();} else {torches[0].GetComponent<Torch>().IceAction();}
+                if(GameManager.instance.t2) {torches[1].GetComponent<Torch>().FireAction();} else {torches[1].GetComponent<Torch>().IceAction();}
+                if(GameManager.instance.t3) {torches[2].GetComponent<Torch>().FireAction();} else {torches[2].GetComponent<Torch>().IceAction();}
+                if(GameManager.instance.t4) {torches[3].GetComponent<Torch>().FireAction();} else {torches[3].GetComponent<Torch>().IceAction();}
+                if(GameManager.instance.t5) {torches[4].GetComponent<Torch>().FireAction();} else {torches[4].GetComponent<Torch>().IceAction();}
+            } else {
+                GameManager.instance.SetTorchesData(torchStates[torches[0]],torchStates[torches[1]],torchStates[torches[2]],torchStates[torches[3]],torchStates[torches[4]]);
+            }
+        }
     }
 
     public void toggleTorch(GameObject torch, bool state)

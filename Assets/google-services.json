@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "744544078889",
+    "firebase_url": "https://trials-of-fire-and-ice.firebaseio.com",
+    "project_id": "trials-of-fire-and-ice",
+    "storage_bucket": "trials-of-fire-and-ice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744544078889:android:d3cba0358bbd1863",
+        "android_client_info": {
+          "package_name": "com.TheVs.CreativeJam7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744544078889-6ep5fdanfjsp2n4hh7ercsmgrfifccq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyffxmxy4jGMSZEuW04JcVJp4D1GvsGgU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
