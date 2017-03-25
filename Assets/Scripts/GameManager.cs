@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
 	}
     public void Reset(){
-         t1 = false;
+        t1 = false;
         t2 = false;
         t3 = false;
         t4 = false;
@@ -200,6 +200,16 @@ public class GameManager : MonoBehaviour
                     string json = snapshot.GetRawJsonValue();
                     DataVR data = JsonUtility.FromJson<DataVR>(json);
                     Debug.Log("synced");
+                    
+                    // sync level data
+                    playerIsVRSpot1 = data.isVRSpot1;
+                    balanced = data.isBalanced;
+                    t1 = data.torch1;
+                    t2 = data.torch2;
+                    t3 = data.torch3;
+                    t4 = data.torch4;
+                    t5 = data.torch5;
+
                     // place self at vr spot
                     VRManager vrManager = FindObjectOfType(typeof(VRManager)) as VRManager;
                     if(vrManager != null){
@@ -209,18 +219,11 @@ public class GameManager : MonoBehaviour
                     }
                     // place player ghost
                     vrPlayerGhost.transform.position = new Vector3(data.playerPositionX, data.playerPositionY, data.playerPositionZ);
-                    // sync level data
-                    playerIsVRSpot1 = data.isVRSpot1;
-                    balanced = data.isBalanced;
-                    t1 = data.torch1;
-                    t2 = data.torch2;
-                    t3 = data.torch3;
-                    t4 = data.torch4;
-                    t5 = data.torch5;
+                    
                 }
             });
         }
-        // send to srever
+        // send to server
         else{
         	DataVR data = new DataVR(){
                 playerPositionX = playerInstance.transform.position.x,
