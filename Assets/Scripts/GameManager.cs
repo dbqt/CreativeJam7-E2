@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     
     //data to sync
     public bool t1, t2, t3, t4, t5, balanced, playerIsVRSpot1;
+    public float syncIntervalTime = 0.5f;
 
     // Use this for initialization
     void Start() {
@@ -55,7 +56,8 @@ public class GameManager : MonoBehaviour
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://trials-of-fire-and-ice.firebaseio.com/");
         // Get the root reference location of the database.
         reference= FirebaseDatabase.DefaultInstance.RootReference;
-  
+
+        Sync();
     }
 
     public void playMusic(int musicNb)
@@ -72,7 +74,6 @@ public class GameManager : MonoBehaviour
 			newOperation = false;
 		}
 
-        SyncVR();
 
 	}
     public void Reset(){
@@ -237,6 +238,8 @@ public class GameManager : MonoBehaviour
 
             reference.Child("DataVR").SetRawJsonValueAsync(json);
         }
+
+        Invoke("Sync", syncIntervalTime);
 	}
 
     public void SetBalanceData(bool balanced){
