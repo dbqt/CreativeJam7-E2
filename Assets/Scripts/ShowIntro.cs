@@ -20,8 +20,10 @@ public class ShowIntro : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
-	
+	void LateUpdate () {
+	   if(Input.GetButtonUp("Submit")) {
+            showNext();
+       }
 	}
 
     public void showNext() {

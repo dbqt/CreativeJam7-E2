@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         // Get the root reference location of the database.
         reference= FirebaseDatabase.DefaultInstance.RootReference;
 
-        Sync();
+        SyncVR();
     }
 
     public void playMusic(int musicNb)
@@ -74,7 +74,9 @@ public class GameManager : MonoBehaviour
 			newOperation = false;
 		}
 
-
+        if(isVRMode && ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetButtonUp("Submit"))){
+            SwapVRPosition();
+        }
 	}
     public void Reset(){
         t1 = false;
@@ -127,22 +129,13 @@ public class GameManager : MonoBehaviour
         if (CurrentLevel == 2)
         {
             playMusic(0);
-        }
-        if (CurrentLevel == 1 || CurrentLevel == 0)
-        {
-            playerInstance.SetActive(false);
-            vrPlayer.SetActive(false);
-            vrPlayerGhost.SetActive(false);
-            if (CurrentLevel == 0)
-            {
-                playMusic(1);
-            }
-        } else
-        {
             if (isVRMode)
             {
                 playerInstance.SetActive(false);
+
+
                 vrPlayer.SetActive(true);
+                
                 vrPlayerGhost.SetActive(true);
             }
             else
@@ -152,6 +145,20 @@ public class GameManager : MonoBehaviour
                 vrPlayerGhost.SetActive(false);
             }
         }
+        else if (CurrentLevel == 1 || CurrentLevel == 0)
+        {
+            playerInstance.SetActive(false);
+            vrPlayer.SetActive(false);
+            vrPlayerGhost.SetActive(false);
+            if (CurrentLevel == 0)
+            {
+                playMusic(1);
+            }
+        } 
+        else if(CurrentLevel == 3){
+            playerInstance.SetActive(false);
+        } 
+        
 		currentOperation = SceneManager.LoadSceneAsync(Levels[CurrentLevel]);
 		newOperation = true;
 
@@ -210,13 +217,22 @@ public class GameManager : MonoBehaviour
                     t4 = data.torch4;
                     t5 = data.torch5;
 
-                    // place self at vr spot
                     VRManager vrManager = FindObjectOfType(typeof(VRManager)) as VRManager;
-                    if(vrManager != null){
-                        Debug.Log("found");
-                        vrPlayer.transform.position = (playerIsVRSpot1) ? vrManager.vrspot1.position : vrManager.vrspot2.position;
-                        vrPlayer.transform.rotation = (playerIsVRSpot1) ? vrManager.vrspot1.rotation : vrManager.vrspot2.rotation;
+
+                    if(vrManager == null){
+                        Debug.Log("unable to find vrmanager");
+                        return;
                     }
+                                
+                    if(playerIsVRSpot1){
+                        vrPlayer.transform.position = vrManager.vrspot1.position;
+                        vrPlayer.transform.rotation = vrManager.vrspot1.rotation;
+                    }
+                    else {
+                        vrPlayer.transform.position = vrManager.vrspot2.position;
+                        vrPlayer.transform.rotation = vrManager.vrspot2.rotation;
+                    }
+
                     // place player ghost
                     vrPlayerGhost.transform.position = new Vector3(data.playerPositionX, data.playerPositionY, data.playerPositionZ);
                     
@@ -242,8 +258,31 @@ public class GameManager : MonoBehaviour
             reference.Child("DataVR").SetRawJsonValueAsync(json);
         }
 
-        Invoke("Sync", syncIntervalTime);
+        Invoke("SyncVR", syncIntervalTime);
 	}
+
+    void SwapVRPosition(){
+        Debug.Log("swapping");
+
+        // place self at vr spot
+        VRManager vrManager = FindObjectOfType(typeof(VRManager)) as VRManager;
+
+        if(vrManager == null){
+            Debug.Log("unable to find vrmanager");
+            return;
+        }
+                    
+        if(playerIsVRSpot1){
+            vrPlayer.transform.position = vrManager.vrspot2.position;
+            vrPlayer.transform.rotation = vrManager.vrspot2.rotation;
+        }
+        else {
+            vrPlayer.transform.position = vrManager.vrspot1.position;
+            vrPlayer.transform.rotation = vrManager.vrspot1.rotation;
+        }
+
+        playerIsVRSpot1 = !playerIsVRSpot1;
+    }
 
     public void SetBalanceData(bool balanced){
         this.balanced = balanced;

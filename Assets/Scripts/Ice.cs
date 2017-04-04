@@ -4,7 +4,7 @@ using System.Collections;
 public class Ice : Actionnable {
 
     public GameObject roof;
-    public GameObject water;
+    public GameObject water, ice;
 
     public override void FireAction()
     {
@@ -17,6 +17,7 @@ public class Ice : Actionnable {
 
         //water.GetComponent<MeshRenderer>().enabled = true;
 		water.transform.GetChild(0).gameObject.SetActive(true);
+        ice.SetActive(false);
 
         water.GetComponent<CapsuleCollider>().enabled = true;
 

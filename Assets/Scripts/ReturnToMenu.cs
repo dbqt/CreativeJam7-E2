@@ -10,16 +10,17 @@ public class ReturnToMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Invoke("UnlockEnd", waitDuration);
+        unlocked = false;
+		//Invoke("UnlockEnd", waitDuration);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(unlocked) {
-            if(Input.anyKey) {
+		//if(unlocked) {
+            if(Input.GetButtonUp("Submit")) {
                 GameManager.instance.LoadNextLevel();
             }
-        }
+        //}
 	}
 
     void UnlockEnd(){

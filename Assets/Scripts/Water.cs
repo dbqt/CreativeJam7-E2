@@ -4,7 +4,7 @@ using System.Collections;
 public class Water : Actionnable
 {
     public GameObject roof;
-    public GameObject ice;
+    public GameObject ice, waterfall;
 
 
     public override void IceAction()
@@ -16,9 +16,10 @@ public class Water : Actionnable
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
 
         //ice.GetComponent<MeshRenderer>().enabled = true;
-		ice.transform.GetChild(0).gameObject.SetActive(true);
+        ice.SetActive(true);
+		waterfall.transform.GetChild(0).gameObject.SetActive(true);
 
-        ice.GetComponent<CapsuleCollider>().enabled = true;
+        waterfall.GetComponent<CapsuleCollider>().enabled = true;
 
         roof.GetComponent<Water_behavior>().toggleWater(this.gameObject, true);
     }

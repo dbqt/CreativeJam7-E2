@@ -3,10 +3,10 @@ using System.Collections;
 
 public class EndGameScript : MonoBehaviour {
 
-
+    bool once = false;
     // Use this for initialization
     void Start() {
-
+        once = false;
     }
 
     // Update is called once per frame
@@ -15,7 +15,11 @@ public class EndGameScript : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        GameManager.instance.LoadNextLevel();
+
+        if(!once){
+            once = true;
+            GameManager.instance.LoadNextLevel();   
+        }
     }
 
     public void returnToMenu()

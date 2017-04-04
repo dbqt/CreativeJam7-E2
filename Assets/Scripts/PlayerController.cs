@@ -25,8 +25,12 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this.fireAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        fireAudio.loop = false;
+        fireAudio.playOnAwake = false;
         fireAudio.clip = fireSound;
         this.iceAudio = (gameObject.AddComponent<AudioSource>() as AudioSource);
+        iceAudio.loop = false;
+        iceAudio.playOnAwake = false;
         iceAudio.clip = iceSound;
     }
 	
