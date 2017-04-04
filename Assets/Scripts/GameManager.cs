@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
+
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 
@@ -255,11 +258,26 @@ public class GameManager : MonoBehaviour
             };
             string json = JsonUtility.ToJson(data);
 
-            reference.Child("DataVR").SetRawJsonValueAsync(json);
+            StartCoroutine(Upload(json));
+
+            //reference.Child("DataVR").SetRawJsonValueAsync(json);
         }
 
         Invoke("SyncVR", syncIntervalTime);
 	}
+
+    IEnumerator Upload(string jsonStr) {
+        
+        UnityWebRequest www = UnityWebRequest.Put("https://trials-of-fire-and-ice.firebaseio.com/DataVR.json", jsonStr);
+        yield return www.Send();
+ 
+        if(www.isError) {
+            Debug.Log(www.error);
+        }
+        else {
+            Debug.Log("Upload complete!");
+        }
+    }
 
     void SwapVRPosition(){
         Debug.Log("swapping");
